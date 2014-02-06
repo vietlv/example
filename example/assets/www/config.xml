@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.giscloud.mdc"
+        versionCode = "0011000"
+        version   = "1.1.0">
+
+    <name>gMoblie</name>
+
+    <description>
+        Ứng dụng gMoblie cho android 
+    </description>
+
+    <author href="http://www.cloudgis.vn">
+        eKGIS
+    </author>
+
+    <icon src="icon.png"/>
+
+    <icon src="res/icon-57.png" gap:platform="ios" width="57" height="57"/>
+    <icon src="res/icon-72.png" gap:platform="ios" width="72" height="72"/>
+    <icon src="res/icon-2x.png" gap:platform="ios" width="114" height="114"/>
+
+    <gap:splash src="res/splash.png"  width="320" height="480" />
+    <gap:splash src="res/splash-2x.png" width="640" height="960"/>
+    <gap:splash src="res/Default-568h@2x.png" width="640" height="1136"/>
+    <gap:splash src="res/Default-Landscape.png" width="1024" height="768"/>
+    <gap:splash src="res/Default-Portrait.png" width="768" height="1024"/>
+
+    <preference name="phonegap-version" value="2.9.0"/>
+
+    <feature name="http://api.phonegap.com/1.0/battery"/>
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+    <feature name="http://api.phonegap.com/1.0/file"/>
+    <feature name="http://api.phonegap.com/1.0/geolocation"/>
+    <feature name="http://api.phonegap.com/1.0/media"/>
+    <feature name="http://api.phonegap.com/1.0/network"/>
+    <feature name="http://api.phonegap.com/1.0/notification"/>
+
+</widget>

@@ -1,0 +1,293 @@
+body {
+    background-color: black;
+}
+
+#gclogo {
+    height: 36px;
+}
+
+#gclogo.android-only {
+    float: left;
+}
+
+#formTitle.android-only {
+    line-height: 36px;
+    margin: 0px;
+    font-size: 1em;
+    padding-left: 1em;
+    display: inline-block;
+    padding-bottom: 1.6em;
+    color: #333;
+}
+
+.locationFormItemTable {
+    width: 100%
+}
+
+.locationAutoDataUnavailable,
+.locationAccuracy,
+.locationManualLat, .locationManualLon {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 1.4em;
+}
+
+.locationAutoData {
+    margin-top: -3px;
+}
+
+.locationManualModeDataCell > div {
+    margin-top: 1px;
+}
+
+.locationModeSelectCell,
+.locationAutoModeDataCell,
+.locationManualModeDataCell {
+    vertical-align: top;
+}
+
+.locationModeSelectCell {
+    width: 110px;
+}
+
+@media all and (min-width: 340px) {
+    .locationModeSelectCell {
+        min-width: 130px;
+    }
+}
+
+#photoPage {
+    background: #000 !important;
+}
+
+#photoContainer {
+    background: #000;
+}
+
+#photoContainer > img {
+    display: block;
+    position: absolute;
+}
+
+#thumbsScrollWrapper {
+    height: 60px;
+    border-bottom: solid 1px #666;
+    background: #000;
+}
+
+#thumbsContainer img {
+    vertical-align: top;
+    height: 55px;
+    padding: 2px 0;
+    margin: 0 1px;
+}
+
+#thumbsContainer > .thumb-active {
+    border-bottom: solid 2px #666
+}
+
+#autocompletePage .ui-bar-a {
+    background-color: #e6e6e6;
+}
+
+#appVersionDisplay {
+    padding-top: 10px;
+}
+
+.smaller-font {
+    font-size: 85%;
+}
+
+.less-visible {
+    opacity: 0.6;
+}
+
+.line {
+    margin-left: -2%;
+    width: 104%;
+    border-top: solid 1px #ccc;
+}
+
+#chooseLayerMessage {
+    margin-top: 20%;
+}
+
+#customForm h2 {
+    padding-bottom: 0.5em;
+    margin-top: 0;
+}
+
+#queueListCloseButton {
+    top: 4px;
+    right: 8px;
+}
+
+.queue-count-placeholder {
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.queue-count {
+    position: relative;
+    z-index: 1500;
+    top: -61px;
+    right: 15px;
+    height: 1.2em;
+    min-width: 1.2em;
+    padding: 0.2em;
+    border-radius: 1.3em;
+    font-size: 0.7em;
+    text-align: center;
+    background-color: rgb(218, 54, 32);
+}
+
+#infoPopup {
+    opacity: 0.9;
+}
+
+#infoPopup ul li {
+    background: none;
+}
+
+#infoPopup ul li p {
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+
+.media-field-title {
+    display: inline-block;
+    padding-right: 1em;
+    vertical-align: top;
+}
+
+.media-field-value {
+    display: inline-block;
+}
+
+#customForm > ul > .ui-li-static {
+    background-color: #fff;
+}
+
+#settingsPage ul > .ui-li-static {
+    background-color: #fff;
+}
+
+#settingsPage .refresh-form-item {
+    border-top: none;
+    padding-top: 0;
+}
+
+#refreshMapsButton {
+    width: 85px;
+}
+
+#refreshLayersButton {
+    width: 85px;
+}
+
+@media all and (max-width: 28em) {
+    #settingsPage .refresh-form-item label {
+        display: none;
+    }
+}
+
+
+/* a fix for listview inside controlgroup */
+.mdc-form-photo-list>.ui-first-child {
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.mdc-form-photo-list>.ui-last-child {
+    -webkit-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-bottom-top-right-radius: 0;
+}
+
+.mdc-form-photo-list>.ui-li {
+    -webkit-border-bottom-left-radius: 0;
+    border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    border-bottom-top-right-radius: 0;
+}
+
+
+.mdc-form-photo-list .mdc-remove-photo-button {
+    border-bottom-width: 0;
+    position: absolute;
+    width: 40px;
+    height: 100%;
+    border-width: 0;
+    border-left-width: 1px;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+}
+
+.mdc-form-photo-list .mdc-remove-photo-button .ui-btn-inner {
+    padding: 0;
+    height: 100%;
+}
+
+.mdc-form-photo-list .mdc-remove-photo-button .ui-btn-inner .ui-btn-icon-notext {
+    width: 24px;
+    height: 24px;
+    -webkit-border-radius: .25em;
+    border-radius: .25em;
+}
+
+/* signup form parsley styles */
+#signupForm .validation-error {
+    display: block;
+    padding: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0.7em;
+    margin-left: 0;
+    height: 1em;
+    overflow: hidden;
+}
+
+#signupForm .parsley-error {
+    background-color: #ffecec;
+}
+
+#signupForm .parsley-error-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#signupForm .parsley-error-list li {
+    color: #ff0000;
+    font-size: 0.8em;
+}
+
+/* overriding default jqm theme */
+.ui-body-d, .ui-overlay-d {
+    background-color: #fff;
+}
+
+.ui-li-divider {
+    background-color: #e9e9e9;
+    border-color: #D6D6D6;
+    background-image: none;
+    color: #333;
+}
+
+.ui-dialog-contain .ui-li-divider {
+    background-color: #3996BE;
+    border-color: #D6D6D6;
+    background-image: none;
+    color: #eee;
+}

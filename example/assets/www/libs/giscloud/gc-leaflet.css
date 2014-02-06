@@ -1,0 +1,82 @@
+.gc-info-popup .leaflet-popup-content-wrapper {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.gc-info-popup .leaflet-popup-content {
+    margin: 7px 5px;
+}
+
+.gc-info-popup .leaflet-popup-content p {
+    margin-top: 7px;
+    margin-right: 0px;
+    margin-bottom: 4px;
+    margin-left: 0px;
+}
+
+.gc-info-popup .gc-info-popup-title {
+    padding: 0.3em;
+    cursor: pointer;
+}
+
+.gc-info-popup .gc-info-popup-content {
+    padding: 0.3em;
+}
+
+.gc-info-popup .leaflet-popup-close-button {
+    position: absolute;
+    right: 2px !important;
+
+    background-color: #fff !important;
+    padding-bottom: 2px !important;
+    padding-right: 0px !important;
+
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.gc-map-tip {
+    width: auto !important;
+    height: auto !important;
+    margin-left: 16px !important;
+    background-color: #fff;
+    color: #222;
+    opacity: 0.8;
+    padding: 0em 1.5em;
+    line-height: 2;
+    border: 1px solid #999;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    ;
+}
+
+/* IE9 hack: an element can't have opacity set if its parent's position is 'static' */
+.leaflet-layer {
+    position: relative;
+}
+
+/* Leaflet Icon Label */
+.leaflet-marker-icon-wrapper {
+    position: absolute
+}
+
+.leaflet-marker-iconlabel {
+    background: #fff;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+    -moz-box-shadow: 0 3px 10px #888;
+     -webkit-box-shadow: 0 3px 14px #999;
+    box-shadow: 0 3px 10px #888;
+    display: block;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    padding: 4px 6px;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}

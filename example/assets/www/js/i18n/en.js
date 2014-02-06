@@ -1,0 +1,71 @@
+if (mdc.lang && mdc.lang.dictionaries) {
+    mdc.lang.dictionaries.en = {
+        "OK": "OK",
+		"Back": "Back",
+		"Delete": "Delete",
+        "Take photo": "Take photo",
+        "No photos": "No photos",
+        "Record message": "Record message",
+		"Stop recording": "Stop recording",
+        "No recording": "No recording",
+        "Play": "Play",
+        "Stop": "Stop",
+        "Send": "Send",
+		"Preparing to send": "Preparing to send...",
+        "Sending": "Sending...",
+		"device id message": "This device's ID is {0}.",
+		"simple error message": "Error: {0}",
+		"audio recording failed": "An error occurred while recording audio.",
+		"gps error message": "I'm not able to determine GPS location.",
+		"audio file read error message": "An error occurred trying to load audio data.",
+		"sending in progress message": "Sending in progress.",
+		"network unreachable message": "Network is ureachable.",
+		"location accuracy message": "Location accuracy is {0} meters. Do you wish to send the data?",
+		"send or cancel buttons": "Send,Cancel",
+		"data sent message": "The data has been sent!",
+		"unregistered mobile message": "No data has been sent. Please link this device to a mobile layer in GIS Cloud. See the Online Tutorial for instructions on how to do that. Feel free to contact us at support@giscloud.com for any additional assistance.",
+		"remote server error message": "The remote server reported an error and no data has been received.",
+		"sending error message": "An error occurred while trying to send the data.",
+
+		"phone id": "Device ID: {0}",
+        "package not full message": "Some required data is missing ({0}).",
+
+        "please wait": "Please wait...",
+        "Longitude": "Longitude",
+        "Latitude": "Latitude",
+        "Accuracy": "Accuracy",
+        "Record": "Record",
+        "Please choose": "Please choose",
+        "error loading form definition message": "Unable to access your form definition file. Is your device in USB storage mode? If so, please uncouple the device from your computer and restart the app. If needed, contact support at support@giscloud.com",
+        "You are here": "You are here",
+        "Show on map": "Show on map",
+        "My location": "My location",
+        "first run message": "Your device ID is {0}. This device needs to be linked to a mobile layer in GIS Cloud. Please follow the Online Tutorial link to see the instructions. Contact support@giscloud.com if you need any further assistance.",
+        "bad login message": "The username and password you've entered are not correct.",
+        "successful signup message": "Congratulations! You have signed up for a GIS Cloud account.\nYou will receive an email from us confirming your subscription. Be sure to log in at\nhttp://editor.giscloud.com",
+        "unsuccessful signup message": "An error occured and the signup was unsuccessful. Please contact support at support@giscloud.com.",
+        "Welcome": "Welcome",
+        "Yes": "Yes",
+        "No":"No",
+
+        "integer too small validation message": "Value should not be smaller than -2147483648.",
+        "integer too big validation message": "Value should not be greater than 2147483647.",
+
+        "none": "none",
+        "No selectable layers": "No selectable layers",
+
+        "queue is empty": "The queue is empty.",
+        "pending": "Pending",
+        "sending": "Sending...",
+        "queued": "Queued",
+
+        "seconds ago": "{0} seconds ago",
+        "minutes ago": "{0} minutes ago",
+        "hours ago": "{0} hours ago",
+        "days ago": "{0} days ago",
+
+        "device version message": "MDC version {0} (build {1}).",
+
+        "": ""
+	};
+}

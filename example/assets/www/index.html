@@ -1,0 +1,507 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+    <title>Data Collection</title>
+
+    <link rel="stylesheet" href="libs/jquery.mobile/bootstrap-jquery.mobile-1.3.1.poor.min.css" type="text/css" charset="utf-8" />
+    <!-- <link rel="stylesheet" href="libs/jquery.mobile/bootstrap-jquery.mobile-1.3.1.min.css" type="text/css" charset="utf-8" /> -->
+    <link rel="stylesheet" href="libs/jquery.mobile/jquery.mobile.structure-1.3.1.min.css" type="text/css" charset="utf-8" />
+    <!-- <link rel="stylesheet" href="libs/jquery.mobile-1.3.0/jqm-icon-pack-3.0.0-fa.css" type="text/css" charset="utf-8" /> -->
+    <!-- <link rel="stylesheet" href="libs/jquery-mobile-fluid960.min.css" type="text/css" charset="utf-8" /> -->
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="libs/giscloud/gc-leaflet.css" type="text/css" charset="utf-8" />
+    <link rel="stylesheet" href="css/mdc.css" type="text/css" charset="utf-8" />
+
+    <!-- <script src="http://jsconsole.com/remote.js?XXXXX-GC-MDC"></script> -->
+    <!-- <script src="http://jsconsole.com/remote.js?NENO-GC-MDC"></script> -->
+    <!-- <script src="http://debug.phonegap.com/target/target-script-min.js#XXXXX-GC-MDC"></script> -->
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/jquery-migrate-1.1.1.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/iscroll-lite.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/parsley.min.js"></script>
+
+    <!-- disable 3d in leaflet for android -->
+    <script type="text/javascript">
+        L_DISABLE_3D = navigator.userAgent.toLowerCase().indexOf('android') !== -1;
+    </script>
+    <script type="text/javascript" charset="utf-8" src="libs/leaflet/leaflet.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/proj4js-compressed.js"></script>
+
+    <!-- i18n js -->
+    <script type="text/javascript" charset="utf-8" src="js/lang.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/i18n/en.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/i18n/hr.js"></script>
+    <!-- end i18n js -->
+
+    <script type="text/javascript" charset="utf-8" src="js/jqm_defaults.js"></script>
+    <script type="text/javascript" charset="utf-8" src="libs/jquery.mobile/jquery.mobile-1.3.1.min.js"></script>
+
+    <!-- app js -->
+    <script type="text/javascript" charset="utf-8" src="libs/giscloud/gc-api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/util.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/appSettings.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/defaultAppSettings.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/settings.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ui.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ui.relays.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/file.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/net.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/rest.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/location.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/storage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/user.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/media.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/autocomplete.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/form.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/queue.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/queueManager.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/mdcInfo.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/packages.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/map.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/main.js"></script>
+    <!-- end app js -->
+</head>
+
+<body>
+    <!-- main page -->
+    <div id="mainPage" data-role="page" data-theme="a">
+        <!-- ios only header
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <img id="gclogo" src="gclogo.png" class="ui-btn-left"/>
+            <h1 id="formTitle">&nbsp;</h1>
+            <a href="#settingsPage" data-rel="page" data-icon="bars" data-iconpos="notext" data-theme="g" class="ui-btn-right">Settings</a>
+        </div>
+        end ios only header -->
+
+        <!-- main content area -->
+        <div id="mainContent" data-role="content" style="display: none">
+            <!-- android only header -->
+            <img id="gclogo" src="gclogo_gray.png" class="android-only ui-btn-left"/>
+            <h1 id="formTitle" class="android-only">&nbsp;</h1>
+            <!-- end android only header -->
+            <!-- login form -->
+            <div id="login" data-role="content" style="display: none" onsubmit="mdc.ui.logIn()">
+                <form id="loginForm">
+                    <h4 style="margin-top: 0px;">Please log in with your <span style="white-space: nowrap">GIS Cloud Account</span></h4>
+                    <label for="username" class="ui-hidden-accessible">Username</label>
+                    <input id="username" name="username" placeholder="Username"/>
+                    <label for="password" class="ui-hidden-accessible">Username</label>
+                    <input id="password" name="password" type="password" placeholder="Password"/>
+                    <input type="button" id="logInButton" data-mini="false" onclick="delay(mdc.ui.logIn, mdc.ui);" value="Log in"/>
+                </form>
+                <center>
+                    <p style="margin-top: 2em">
+                        No account yet?
+                        <a href="#signupPage" data-rel="page">Sign up!</a>
+                    </p>
+                    <p style="margin-top: .1em">
+                        <strong>New!</strong> Log in with <a href="#" onclick="mdc.ui.sfdcLogin(); return false;">Salesforce</a>
+                    </p>
+                    <p style="margin-top: .5em">
+                        Need <a href="#helpPage" data-rel="page">help?</a>
+                    </p>
+                </center>
+            </div>
+            <!-- end login form -->
+
+            <!-- choose layer message -->
+            <div id="chooseLayerMessage" data-role="content" style="display: none">
+                <center>
+                    <strong>
+                        Go to
+                        <a href="#settingsPage" data-rel="page">Settings</a>
+                        and select a map and a layer
+                    </strong>
+                </center>
+            </div>
+
+            <!-- the custom form -->
+            <div id="customForm" style="display: none"></div>
+        </div>
+        <!-- end main content area -->
+
+        <!-- queue popup -->
+        <div id="queuePage" data-role="popup" data-overlay-theme="a" data-theme="a">
+            <h4>Data queue</h4>
+            <div data-role="content" data-theme="a" data-content-theme="a">
+                <ul id="queueList" data-role="listview" data-split-icon="delete" data-split-theme="a">&nbsp;</ul>
+            </div>
+            <a id="queueListCloseButton" href="#" data-rel="back" data-role="button" data-theme="a" data-icon="back" data-iconpos="notext" class="ui-btn-right">Close</a>
+        </div>
+        <!-- end queue popup -->
+
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="sendButton" href="#" class="ui-disabled" data-theme="g" data-icon="check" onclick="delay(mdc.ui.send, mdc.ui);">Send</a></li>
+                    <li><a id="queueButton" href="#" data-theme="a" data-icon="forward" onclick="delay(mdc.ui.queueList.show, mdc.ui.queueList);">Queue</a></li>
+                    <li><a href="#mapPage" class="mapButton ui-disabled" data-theme="a" data-icon="grid" data-rel="page">Map</a>
+                        <div class="queue-count-placeholder"><div class="queue-count" style="display: none">&nbsp;</div></div>
+                    </li>
+                    <li><a href="#settingsPage" data-theme="a" data-icon="bars">Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end footer -->
+
+    </div>
+    <!-- end main page -->
+
+    <!-- sign up page -->
+    <div id="signupPage" data-role="page" data-content-theme="a" data-theme="a" data-add-back-btn="true">
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <h1>Sign up</h1>
+        </div>
+        <!-- end header -->
+        <div data-role="content">
+            <p>Fill in your details to sign up for a <span style="white-space: nowrap">GIS Cloud</span> account.</p>
+            <br/>
+            <form id="signupForm" data-validate="parsley" data-focus="none">
+                <label for="signupUsername" class="ui-hidden-accessible">Username</label>
+                <input id="signupUsername" name="signupUsername" data-mini="true"
+                    placeholder="Username"
+                    data-required="true"
+                    data-regexp="^[0-9a-zA-Z_\-]+$"
+                    data-minlength="5"
+                    data-required-message="You have to enter a username."
+                    data-minlength-message="Must be at least 5 characters long."
+                    data-regexp-message="Use only alphanumeric characters, - or _."
+                    data-error-container="#signupUsernameError"
+                />
+                <label id="signupUsernameError" class="validation-error"></label>
+
+                <label for="signupEmail" class="ui-hidden-accessible">Email</label>
+                <input id="signupEmail" name="signupEmail" data-mini="true"
+                    placeholder="Email"
+                    data-required="true"
+                    data-type="email"
+                    data-required-message="You have to enter an email."
+                    data-error-container="#signupEmailError"
+                />
+                <label id="signupEmailError" class="validation-error"></label>
+
+                <label for="signupPassword" class="ui-hidden-accessible">Password</label>
+                <input id="signupPassword" name="signupPassword" data-mini="true" type="password"
+                    placeholder="Password"
+                    data-required="true"
+                    data-minlength="5"
+                    data-required-message="You have to enter a password."
+                    data-error-message="Must be at least 5 characters long."
+                    data-error-container="#signupPasswordError"
+                />
+                <label id="signupPasswordError" class="validation-error"></label>
+
+                <label for="signupPasswordRepeat" class="ui-hidden-accessible">Repeat password</label>
+                <input id="signupPasswordRepeat" name="signupPasswordRepeat" data-mini="true" type="password"
+                    placeholder="Repeat password"
+                    data-required="true"
+                    data-minlength="5"
+                    data-equalto="#signupPassword"
+                    data-error-message="Passwords don't match."
+                    data-error-container="#signupPasswordRepeatError"
+                />
+                <label id="signupPasswordRepeatError" class="validation-error"></label>
+                <center>
+                    <p>
+                        By signing up you are agreeing to the
+                        <a href="#" onclick="window.open('http://www.giscloud.com/terms-of-use', '_system'); return false;">Terms of Use</a>
+                        and the
+                        <a href="#" onclick="window.open('http://www.giscloud.com/privacy-policy', '_system'); return false;">Privacy Policy</a>.
+                    </p>
+                </center>
+                <input type="button" id="signupButton" data-mini="false" onclick="delay(mdc.ui.signUp, mdc.ui);" value="Sign up"/>
+            </form>
+
+        </div>
+    </div>
+    <!-- end sign up page -->
+
+    <!-- help page -->
+    <div id="helpPage" data-role="page" data-content-theme="a" data-theme="a" data-add-back-btn="true">
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <h1>Manual</h1>
+        </div>
+        <!-- end header -->
+        <div data-role="content">
+            <h4>Getting started</h4>
+            <p>
+                Once you log in, you'll be taken to the settings page. Choose a map and a layer that you want to populate with new data.
+            </p>
+            <p>
+                There's a sample map and a layer that you can use for testing purposes.
+                Of course, later you can choose between the maps you've created in the <span style="white-space: nowrap">GIS Cloud</span> Map Editor and the maps someone has shared with you.
+            </p>
+            <p>
+                If you don't have a <span style="white-space: nowrap">GIS Cloud</span> account, <a href="#signupPage" data-rel="page">sign up</a> for one. It's free!
+            </p>
+
+            <h4>Offline mode</h4>
+            <p>
+                You can choose to work in offline mode and collect data even if your device doesn't have an internet connection available.
+                Note that you can activate the offline mode at will by choosing <i>Network access off</i> in settings.
+            </p>
+            <p>
+                In offline mode you won't be able to log in, view the map, or switch between the maps and layers so make sure that you've set your project while online.
+                All the data you collect while offline can be found in the queue. You can choose to delete data submissions there.
+                Once you connect to the internet, the submissions you've collected will be immediately sent.
+            </p>
+
+            <h4>Cellular data connection</h4>
+            <p>
+                If you set the <i>Send using cellular data network</i> option to <i>No</i>, your device will send the data you collect only via Wi-fi connection and preventing unnecessary mobile internet traffic.
+            </p>
+
+            <h4>Collect Data</h4>
+            <p>
+                To collect data simply go to the <i>Form</i>, enter the required data and tap <i>Send</i>.
+            </p>
+
+            <h4>My location and data view</h4>
+            <p>
+                In the Map tab you can view all the layers that are in the map and review the attribute data of all the submissions simply by tapping on the point.
+            </p>
+            <p>
+                After a submission, tap <i>Refresh</i> to see the new point on the map.
+            </p>
+            <p>
+                Note that the map is unavailable in offline mode.
+            </p>
+            <p>
+                For more information on how to create maps, layers, custom forms etc. check out the
+                <a href="#" onclick="window.open('http://www.giscloud.com/manual/mobile-data-collection-2/', '_system'); return false;">User Manual</a>
+                on the <span style="white-space: nowrap">GIS Cloud</span> web page.
+            </p>
+
+            <h4>Contact us</h4>
+            <p>
+                You can always contact us if you have more questions. Email us at
+                <a href="mailto:support@giscloud.com">support@giscloud.com</a>.
+            </p>
+        </div>
+    </div>
+    <!-- end help page -->
+
+    <!-- autocomplete page -->
+    <div id="autocompletePage" data-role="page" data-content-theme="a" data-theme="a" data-add-back-btn="true">
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <h1>&nbsp;</h1>
+        </div>
+        <!-- end header -->
+        <div data-role="content">
+            <div id="autocompleteWrapper"></div>
+        </div>
+    </div>
+    <!-- end autocomplete page -->
+
+    <!-- settings page -->
+    <div id="settingsPage" data-role="page" data-theme="a" data-content-theme="a" data-add-back-btn="true">
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <h1>Settings</h1>
+            <a href="#helpPage" data-rel="page" data-icon="info" data-iconpos="notext" data-theme="g" class="ui-btn-right">Help</a>
+        </div>
+        <!-- end header -->
+        <div data-role="content">
+
+            <h3>Mobile Data Collection</h3>
+            <ul data-role="listview">
+                <li data-role="fieldcontain">
+                    <label for="mapsSelect">
+                        <button id="refreshMapsButton" data-icon="refresh" data-mini="true" data-inline="true" onclick="delay(mdc.ui.refreshMaps, mdc.ui);">
+                            Maps
+                        </button>
+                    </label>
+                    <select id="mapsSelect" name="mapsSelect" data-mini="true" disabled="disabled"/>
+                        <option>&nbsp;</option>
+                    </select>
+                </li>
+                <li data-role="fieldcontain">
+                    <label for="layersSelect">
+                        <button id="refreshLayersButton" data-icon="refresh" data-mini="true" data-inline="true" onclick="delay(mdc.ui.refreshLayers, mdc.ui);">
+                            Layers
+                        </button>
+                    </label>
+                    <select id="layersSelect" name="layersSelect" data-mini="true" disabled="disabled"/>
+                        <option>&nbsp;</option>
+                    </select>
+                </li>
+                <li data-role="fieldcontain" class="refresh-form-item">
+                    <label for="refreshFormButton">&nbsp;</label>
+                    <button id="refreshFormButton" name="refreshFormButton" data-icon="refresh" data-inline="true" data-mini="true" data-mini="true" onclick="delay(mdc.ui.refreshForm, mdc.ui);">
+                        Refresh form
+                    </button>
+                </li>
+            </ul>
+            <br/>
+            <h3>Application</h3>
+            <ul data-role="listview">
+                <li data-role="fieldcontain">
+                    <label for="networkOn">Network access is </label>
+                    <select name="networkOn" id="networkOn" data-role="slider" data-mini="true">
+                        <option value="on">On</option>
+                        <option value="off">Off</option>
+                    </select>
+                </li>
+                <li data-role="fieldcontain">
+                    <label for="use3G" style="line-height: 1">Send using cellular data network</label>
+                    <select name="use3G" id="use3G" data-role="slider" data-mini="true">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </li>
+            </ul>
+            <br/>
+            <h3>User</h3>
+            <p>
+                <button id="logOutButton" data-mini="true" data-inline="true" data-icon="delete" onclick="delay(mdc.ui.logOut, mdc.ui);" disabled="disabled">
+                    Log out
+                </button>
+            </p>
+            <div id="appVersionDisplay" class="smaller-font less-visible">&nbsp;</div>
+        </div>
+
+        <!-- footer -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li><a id="formButton" href="#mainPage" data-icon="back">Form</a></li>
+                    <li><a href="#mapPage" class="mapButton ui-disabled" data-theme="a" data-icon="grid" data-rel="page">Map</a>
+                        <div class="queue-count-placeholder"><div class="queue-count" style="display: none">&nbsp;</div></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- end footer -->
+
+    </div>
+    <!-- end settings page -->
+
+    <!-- map page -->
+    <div id="mapPage" data-role="page" data-theme="d" data-add-back-btn="true">
+        <!-- header -->
+        <!-- <div data-role="header" data-theme="g">
+            <h1 id="mapTitle">&nbsp;</h1>
+            <a href="#helpPage" data-rel="page" data-icon="info" data-theme="g" class="ui-btn-right">Layers</a>
+        </div> -->
+        <!-- end header -->
+
+        <div data-role="content" style="margin: 0; padding: 0">
+            <div id="mapContainer"></div>
+        </div>
+
+        <!-- feature info panel -->
+        <div id="infoPopup" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+            <div id="infoTableWrapper">
+                <ul id="infoTable" data-role="listview" data-theme="a"></ul>
+            </div>
+        </div>
+        <!-- end feature info panel -->
+
+        <!-- layers panel -->
+        <div id="layersPopup" data-role="panel" data-position="right" data-display="overlay" data-theme="a">
+
+        </div>
+        <!-- end layers panel -->
+
+
+        <!-- listen popup -->
+        <div id="listenPopup" data-role="popup" data-overlay-theme="a" data-theme="a">
+            <a  href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+            <div data-role="content">
+                <audio id="listenPopupAudio" src="" controls></audio>
+            </div>
+        </div>
+        <!-- end listen popup -->
+
+        <!-- map footer -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div id="viewingToolbar" data-role="navbar">
+                <ul>
+                    <li><a href="#mainPage" data-icon="back">Form</a></li>
+                    <li><a id="mapReloadButton" href="#" data-icon="refresh">Refresh</a></li>
+                    <li><a id="mapMyLocationButton" href="#" data-icon="search">Locate</a></li>
+                    <li><a href="#settingsPage" data-theme="a" data-icon="bars">Settings</a></li>
+                </ul>
+            </div>
+            <div id="pinpointingToolbar" data-role="navbar" style="display: none">
+                <ul>
+                    <li><a id="mapPinpointAcceptButton" href="#" data-icon="check">Accept</a></li>
+                    <li><a id="mapPinpointGPSButton" href="#" data-icon="search">GPS</a></li>
+                    <li><a id="mapPinpointCancelButton" href="#" data-icon="delete">Cancel</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- end map footer -->
+
+    </div>
+    <!-- end map page -->
+
+    <!-- photo page -->
+    <div id="photoPage" data-role="page" data-add-back-btn="true">
+        <!-- header -->
+        <div data-role="header" data-position="fixed" data-theme="g" data-tap-toggle="false">
+            <h1>&nbsp;</h1>
+        </div>
+        <!-- end header -->
+        <div data-role="content" style="margin: 0; padding: 0">
+            <div id="thumbsScrollWrapper">
+                <div id="thumbsContainer"></div>
+            </div>
+            <div id="photoContainer"></div>
+        </div>
+    </div>
+    <!-- end photo page -->
+
+    <!-- templates page -->
+    <div id="formItemTemplates" data-role="page">
+        <div id="locationFormItemTemplate">
+            <table class="locationFormItemTable">
+                <tbody>
+                    <tr>
+                        <td class="locationModeSelectCell">
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <label for="locationModeAuto">GPS</label>
+                                <input type="radio" id="locationModeAuto" name="locationMode" class="locModeRadio" value="auto" checked="checked"/>
+                                <label for="locationModeManual">Manual</label>
+                                <input type="radio" id="locationModeManual" name="locationMode" class="locModeRadio" value="manual"/>
+                            </fieldset>
+                        </td>
+                        <td class="locationAutoModeDataCell">
+                            <div class="locationAutoDataUnavailable ui-input-text">Getting location...</div>
+                            <div class="locationAutoData" style="display: none">
+                                <button class="locationAutoShowOnMap mapButton" data-mini="true" data-icon="grid" data-inline="true">
+                                    Show on map
+                                </button>
+                                <div class="locationAccuracy ui-input-text">&nbsp;</div>
+                            </div>
+                        </td>
+                        <td class="locationManualModeDataCell" style="display: none">
+                            <button class="locationManualPinpoint mapButton" data-mini="true" data-icon="search">
+                                Select location
+                            </button>
+                            <!-- <input type="number" class="locationManualLat" data-mini="true" placeholder="Latitude"/>
+                            <input type="number" class="locationManualLon" data-mini="true" placeholder="Longitude"/> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end templates page -->
+
+</body>
+
+</html>

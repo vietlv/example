@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<body>
+</body>
+<script type="text/javascript" src="libs/jquery-1.9.1.min.js"></script>
+<script type="text/javascript">
+    $.get('index.html')
+    .done(function (response) {
+        txt = response;
+    })
+    .done(function (html) {
+        var i18nBlockStart = "<!-- i18n js -->",
+            i18nBlockEnd = "<!-- end i18n js -->",
+            appJsBlockStart = "<!-- app js -->",
+            appJsBlockEnd = "<!-- end app js -->",
+            scriptRx = /(?!<!--)<script.* src="([\w\-\/\.]+\.js)"><\/script>\s*$/igm,
+            root = "assets/www/";
+
+        function addRoot(file) {
+            return root + file;
+        }
+
+        function allMatches(rx, txt) {
+            var match, arr = [];
+            while ((match = rx.exec(txt)) !== null)
+                arr.push(match[1]);
+            return arr;
+        }
+
+        indexHtml = html;
+        i18nStart = html.indexOf(i18nBlockStart);
+        i18nEnd = html.indexOf(i18nBlockEnd) + i18nBlockEnd.length;
+        appJsStart = html.indexOf(appJsBlockStart);
+        appJsEnd = html.indexOf(appJsBlockEnd) + appJsBlockEnd.length;
+
+        files = {};
+
+        // get i18n files
+        files.i18n = allMatches(scriptRx, html.substring(i18nStart, i18nEnd)).map(addRoot);
+
+        // get app js files
+        files.app = allMatches(scriptRx, html.substring(appJsStart, appJsEnd)).map(addRoot);
+
+        // slice
+        sliced = html.slice(0, i18nStart) +
+                 html.slice(i18nEnd, appJsStart) +
+                 html.slice(appJsEnd);
+    });
+</script>
+</html>
